@@ -1,0 +1,682 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ff3e5f;
+    --secondary-color: #121212;
+    --text-color: #ffffff;
+    --light-text: #b3b3b3;
+    --border-color: #333;
+    --hover-color: #ff5c7c;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --card-bg: rgba(30, 30, 30, 0.7);
+    --gradient: linear-gradient(135deg, #ff3e5f 0%, #5b2cff 100%);
+    --button-gradient: linear-gradient(135deg, #ff3e5f 0%, #5b2cff 100%);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(255, 62, 95, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 62, 95, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(255, 62, 95, 0.5); }
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    33% {
+        transform: translateY(-10px) translateX(10px);
+    }
+    66% {
+        transform: translateY(10px) translateX(-10px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+
+@keyframes rotateAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glowPulse {
+    0% {
+        opacity: 0.5;
+        filter: blur(80px);
+    }
+    50% {
+        opacity: 1;
+        filter: blur(100px);
+    }
+    100% {
+        opacity: 0.5;
+        filter: blur(80px);
+    }
+}
+
+body {
+    font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(125deg, 
+        rgba(255, 62, 95, 0.4) 0%, 
+        rgba(91, 44, 255, 0.4) 25%, 
+        rgba(18, 18, 18, 0.1) 50%, 
+        rgba(91, 44, 255, 0.4) 75%, 
+        rgba(255, 62, 95, 0.4) 100%);
+    opacity: 0.7;
+    z-index: -2;
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    opacity: 0.7;
+    z-index: -1;
+}
+
+/* 动态光晕 */
+.glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.7;
+    transition: all 0.5s ease;
+}
+
+.glow-orb:nth-child(1) {
+    top: 20%;
+    right: 15%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 62, 95, 0.7) 0%, rgba(255, 62, 95, 0) 70%);
+    animation: 
+        floatAnimation 20s ease-in-out infinite, 
+        rotateAnimation 30s linear infinite,
+        glowPulse 8s ease-in-out infinite;
+}
+
+.glow-orb:nth-child(2) {
+    bottom: 10%;
+    left: 10%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(91, 44, 255, 0.7) 0%, rgba(91, 44, 255, 0) 70%);
+    animation: 
+        floatAnimation 15s ease-in-out infinite reverse, 
+        rotateAnimation 25s linear infinite reverse,
+        glowPulse 10s ease-in-out infinite 2s;
+}
+
+.glow-orb:nth-child(3) {
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    animation: 
+        floatAnimation 25s ease-in-out infinite, 
+        rotateAnimation 40s linear infinite,
+        glowPulse 12s ease-in-out infinite 1s;
+    transform-origin: center center;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 标题样式 */
+header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeIn 1s ease-out;
+}
+
+h1 {
+    font-size: 3rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--gradient);
+    transition: width 0.5s ease;
+}
+
+h1:hover::after {
+    width: 100%;
+}
+
+.subtitle {
+    color: var(--light-text);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 上传区域样式 */
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+    animation: fadeIn 1s ease-out 0.3s both;
+}
+
+.upload-area {
+    width: 100%;
+    max-width: 500px;
+    height: 220px;
+    border: 2px dashed rgba(255, 62, 95, 0.3);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgba(30, 30, 30, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 62, 95, 0.2),
+        rgba(91, 44, 255, 0.2),
+        rgba(255, 62, 95, 0.2)
+    );
+    z-index: -1;
+    transition: all 0.5s ease;
+    animation: gradientFlow 8s linear infinite;
+    background-size: 200% 200%;
+    opacity: 0.3;
+}
+
+.upload-area:hover::before {
+    opacity: 1;
+}
+
+.upload-area:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 62, 95, 0.2);
+}
+
+.upload-area.dragover {
+    border-color: var(--primary-color);
+    background-color: rgba(255, 62, 95, 0.05);
+    animation: pulse 1s infinite;
+}
+
+.upload-placeholder {
+    text-align: center;
+    color: var(--light-text);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.upload-placeholder img {
+    margin-bottom: 15px;
+    opacity: 0.7;
+    filter: invert(1);
+    width: 60px;
+    height: 60px;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover .upload-placeholder img {
+    transform: scale(1.1);
+}
+
+.small {
+    font-size: 0.8rem;
+    margin-top: 8px;
+    opacity: 0.7;
+}
+
+.btn {
+    background: var(--gradient);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 62, 95, 0.3);
+    position: relative;
+    overflow: hidden;
+    background-size: 200% 200%;
+    animation: gradientFlow 5s ease infinite;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(255, 62, 95, 0.4);
+}
+
+.btn:hover::after {
+    transform: translateX(100%);
+    transition: transform 0.8s ease;
+}
+
+/* 结果区域样式 */
+.result-section {
+    display: none;
+    margin-top: 60px;
+    animation: fadeIn 1s ease-out;
+}
+
+.image-container {
+    width: 100%;
+    max-height: 450px;
+    overflow: hidden;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.7));
+    pointer-events: none;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.image-container:hover img {
+    transform: scale(1.03);
+}
+
+.poems-container {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.poems-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 62, 95, 0.1),
+        rgba(91, 44, 255, 0.1),
+        rgba(255, 62, 95, 0.1)
+    );
+    z-index: 0;
+    transition: all 0.5s ease;
+    animation: gradientFlow 12s linear infinite;
+    background-size: 200% 200%;
+}
+
+.poems-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1.8rem;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.poems-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient);
+    border-radius: 3px;
+    background-size: 200% 200%;
+    animation: gradientFlow 5s ease infinite;
+}
+
+.poem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.poem-item {
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.poem-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background-size: 200% 200%;
+    animation: gradientFlow 5s ease infinite;
+}
+
+.poem-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 62, 95, 0.1),
+        rgba(91, 44, 255, 0.1)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    background-size: 200% 200%;
+    animation: gradientFlow 8s linear infinite;
+}
+
+.poem-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.poem-item:hover::before {
+    opacity: 1;
+}
+
+.poem-item:hover::after {
+    opacity: 1;
+}
+
+.poem-text {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.poem-item:hover .poem-text {
+    transform: translateX(10px);
+}
+
+/* 诗词详情弹窗 */
+.poem-detail {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.poem-detail-content {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.poem-detail-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 62, 95, 0.1),
+        rgba(91, 44, 255, 0.1),
+        rgba(255, 62, 95, 0.1)
+    );
+    transform: rotate(45deg);
+    z-index: 0;
+    transition: all 0.5s ease;
+    animation: gradientFlow 12s linear infinite;
+    background-size: 200% 200%;
+}
+
+.poem-detail.active .poem-detail-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--light-text);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.close-btn:hover {
+    color: var(--primary-color);
+    transform: rotate(90deg);
+}
+
+#poemTitle {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+#poemAuthor {
+    color: var(--light-text);
+    margin-bottom: 25px;
+    font-size: 1rem;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+#poemContent {
+    line-height: 2;
+    font-size: 1.1rem;
+    white-space: pre-line;
+    color: var(--text-color);
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 页脚样式 */
+footer {
+    margin-top: 60px;
+    text-align: center;
+    color: var(--light-text);
+    font-size: 0.9rem;
+    padding: 20px 0;
+    animation: fadeIn 1s ease-out 0.5s both;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--hover-color);
+    text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    .upload-area {
+        height: 180px;
+    }
+    
+    .poems-container {
+        padding: 25px;
+    }
+    
+    .poem-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* 移除粒子容器样式 */
+.particles-container {
+    display: none;
+} 
